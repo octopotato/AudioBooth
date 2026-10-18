@@ -52,6 +52,13 @@ final class TimerPickerSheetViewModel: TimerPickerSheet.Model {
     observeChapterChanges()
   }
 
+  isolated deinit {
+    print("TimerPickerSheetViewModel deinit")
+    sleepTimer?.invalidate()
+    alarmTimer?.invalidate()
+    endLiveActivity()
+  }
+
   private func setupShakeObserver() {
     ShakeDetector.shared.shakePublisher
       .sink { [weak self] in
